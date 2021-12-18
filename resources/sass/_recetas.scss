@@ -1,0 +1,23 @@
+:root{
+    --font-size:4rem;
+}
+body a{
+    font-family: $parrafos-font-family;
+    font-weight: bold;
+}
+.bg-primary .navbar-brand{
+    color: $white;
+    font-size: var(--font-size);
+    &:hover{
+        color: blue;
+        transition: color 0.5s linear;
+    }
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: $white;
+    &:hover{
+        color: blue;
+        transition: color 0.5s linear;
+    }
+}
