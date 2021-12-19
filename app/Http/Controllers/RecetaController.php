@@ -39,6 +39,7 @@ class RecetaController extends Controller
     public function store(Request $request)
     {
         //
+        // dd($request->all());
         //validaciones
         $data = request()->validate([
             'nombre' => 'required|min:6',
@@ -48,7 +49,7 @@ class RecetaController extends Controller
             'nombre' =>$data['nombre'],
 
         ]);
-        return redirect()-> action([OdontologiaController::class, 'index']);
+        return redirect()-> action([RecetaController::class, 'index']);
     }
 
     /**

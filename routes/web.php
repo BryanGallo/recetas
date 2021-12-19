@@ -16,16 +16,18 @@ use App\Http\Controllers\RecetaController;
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
     // return "Hola";
-});
+});*/
 // Route::get('/nosotros', function () {
 //     return view('nosotros');
 // });
 //llamando a un controlador en este caso 'RecetaController'
+Route::get('/',[RecetaController::class,'index'] ) -> name('recetas');
 Route::get('/recetas',[RecetaController::class,'index'] ) -> name('recetas.index');
 Route::get('/recetas/create', [RecetaController::class,'create']) -> name('recetas.create');
+Route::post('/recetas', [RecetaController::class,'store']) -> name('recetas.store');
 Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
