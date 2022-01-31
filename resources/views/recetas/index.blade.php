@@ -21,6 +21,7 @@
         <h1 class="text-center mb-5">
             Administra Recetas
         </h1>
+        {{-- {{$userRecetas}} --}}
         <div class="col-md-10 mx-auto bg-white p-3">
             <table class="table text-center">
                 <thead class="bg-primary text-ligth">
@@ -31,11 +32,17 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ( $userRecetas as $userReceta )
                     <tr>
-                        <td>Pan</td>
-                        <td>Panaderia</td>
-                        <td> X M</td>
+                        <td>{{$userReceta->nombre}}</td>
+                        <td>{{$userReceta->categoria_id}}</td>
+                        <td>
+                            <a href="" class="btn btn-success">Ver</a>
+                            <a href="" class="btn btn-primary">Editar</a>
+                            <a href="" class="btn btn-danger">Eliminar</a>
+                        </td>
                     </tr>
+                    @endforeach
 
                 </tbody>
             </table>
