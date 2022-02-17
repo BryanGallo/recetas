@@ -35,9 +35,9 @@
                     @foreach ( $userRecetas as $userReceta )
                     <tr>
                         <td>{{$userReceta->nombre}}</td>
-                        <td>{{$userReceta->categoria_id}}</td>
+                        <td>{{$userReceta->categoriaReceta->nombre}}</td>
                         <td>
-                            <a href="" class="btn btn-success">Ver</a>
+                            <a href="{{route('recetas.show',['receta'=>$userReceta->id])}}" class="btn btn-success">Ver</a>
                             <a href="" class="btn btn-primary">Editar</a>
                             <a href="" class="btn btn-danger">Eliminar</a>
                         </td>

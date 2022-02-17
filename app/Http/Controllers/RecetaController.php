@@ -13,7 +13,8 @@ class RecetaController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth'); //vertic que se haya realizado la autentificacion
+        // con el except indicamos que queremos que no este protegido de nuestra pagina
+        $this->middleware('auth',['except'=>'show']); //vertic que se haya realizado la autentificacion
     }
 
     /**
@@ -27,7 +28,7 @@ class RecetaController extends Controller
         //Auth::user()->userRecetas->dd();//dependiendo de la informacion del usuario autentificado
         $userRecetas = Auth::user()->userRecetas;
         // return 'Bienvenido';
-        return view('recetas.index')->with('userRecetas',$userRecetas);
+        return view('recetas.index')->with('userRecetas', $userRecetas);
     }
 
     /**
@@ -40,8 +41,8 @@ class RecetaController extends Controller
         //
         // $categorias=DB::table('categorias')->get()->pluck('nombre','id');
         // $categorias=Categoria::all()->dd();
-        $categorias=Categoria::all(['id','nombre']);
-        return view('recetas.create')->with('categorias',$categorias);
+        $categorias = Categoria::all(['id', 'nombre']);
+        return view('recetas.create')->with('categorias', $categorias);
         //create carga formulario
         //consulta
     }
@@ -60,32 +61,46 @@ class RecetaController extends Controller
         //validaciones
         $data = request()->validate([
             'nombre' => 'required|min:6',
-            'categoria'=> 'required',
-            'ingredientes'=>'required',
-            'preparacion'=>'required',
-            'img'=>'required|image',
+            'categoria' => 'required',
+            'ingredientes' => 'required',
+            'preparacion' => 'required',
+            'img' => 'required|image',
 
         ]);
 
         //variable
-        $ruta_imagen=($request['img']->store('upload-recetas','public'));
+        $ruta_imagen = ($request['img']->store('upload-recetas', 'public'));
 
         //redimensionar imagen
         // $img=Image::make(public_path("storage/{$ruta_imagen}"))->fit(1000,50);
 
         //guaradr en el disco duro del servidor
         // $img->save();
-        //almacenar en la base de datos
-        DB::table('recetas')-> insert([
-            'nombre' =>$data['nombre'],
-            'ingredientes'=>$data['ingredientes'],
-            'preparacion'=>$data['preparacion'],
-            'imagen'=> $ruta_imagen,
-            'user_id'=>Auth::user()->id,//obtener el id del usuario que esta logeado
-            'categoria_id'=>$data['categoria'],
 
+        //Almacenar BDD sin modelo
+        //almacenar en la base de datos
+        // DB::table('recetas')-> insert([
+        //     'nombre' =>$data['nombre'],
+        //     'ingredientes'=>$data['ingredientes'],
+        //     'preparacion'=>$data['preparacion'],
+        //     'imagen'=> $ruta_imagen,
+        //     'user_id'=>Auth::user()->id,//obtener el id del usuario que esta logeado
+        //     'categoria_id'=>$data['categoria'],
+
+        // ]);
+
+        //alamacenar la BDD con modelo
+        Auth::user()->userRecetas()->create([
+                'nombre' =>$data['nombre'],
+                'ingredientes'=>$data['ingredientes'],
+                'preparacion'=>$data['preparacion'],
+                'imagen'=> $ruta_imagen,
+                'categoria_id'=>$data['categoria'],
         ]);
-        return redirect()-> action([RecetaController::class, 'index']);
+
+
+
+        return redirect()->action([RecetaController::class, 'index']);
     }
 
     /**
@@ -97,6 +112,7 @@ class RecetaController extends Controller
     public function show(Receta $receta)
     {
         //
+        return view('recetas.show')->with('receta',$receta);
     }
 
     /**
