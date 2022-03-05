@@ -37,9 +37,15 @@
                         <td>{{$userReceta->nombre}}</td>
                         <td>{{$userReceta->categoriaReceta->nombre}}</td>
                         <td>
-                            <a href="{{route('recetas.show',['receta'=>$userReceta->id])}}" class="btn btn-success">Ver</a>
-                            <a href="" class="btn btn-primary">Editar</a>
-                            <a href="" class="btn btn-danger">Eliminar</a>
+                            <a href="{{route('recetas.show',['receta'=>$userReceta->id])}}" class="btn btn-success d-block mb-1">Ver</a>
+                            <a href="{{route('recetas.edit',['receta'=>$userReceta->id])}}" class="btn btn-primary d-block mb-1">Editar</a>
+                            {{-- <form method="POST" action="{{route('recetas.destroy',['receta'=>$userReceta->id])}}"> --}}
+                                @csrf
+                                @method('delete')
+                                {{-- <input type="submit" class="btn btn-danger d-block mb-1 w-100" value="Eliminar"> --}}
+                                {{-- traemos el componenete de Vuejs --}}
+                                <eliminar-receta receta-id={{$userReceta->id}}></eliminar-receta>
+                                {{-- </form> --}}
                         </td>
                     </tr>
                     @endforeach

@@ -124,6 +124,9 @@ class RecetaController extends Controller
     public function edit(Receta $receta)
     {
         //
+        $categorias = Categoria::all(['id', 'nombre']);
+        return view('recetas.edit')->with('categorias',$categorias)
+                                    ->with('receta',$receta);
     }
 
     /**
@@ -135,7 +138,31 @@ class RecetaController extends Controller
      */
     public function update(Request $request, Receta $receta)
     {
-        //
+        //policy
+        $this->authorize('update',$receta);
+        //validar campos
+        $data = request()->validate([
+            'nombre' => 'required|min:6',
+            'categoria' => 'required',
+            'ingredientes' => 'required',
+            'preparacion' => 'required',
+
+        ]);
+        //asignar los valores
+        $receta->nombre=$data['nombre'];
+        $receta->categoria_id=$data['categoria'];
+        $receta->ingredientes=$data['ingredientes'];
+        $receta->preparacion=$data['preparacion'];
+
+
+        if (request('img')) {
+            $ruta_imagen = ($request['img']->store('upload-recetas', 'public'));
+            $receta->imagen=$ruta_imagen;
+        }
+        $receta->save();
+
+        return redirect()->action([RecetaController::class, 'index']);
+
     }
 
     /**
@@ -147,5 +174,8 @@ class RecetaController extends Controller
     public function destroy(Receta $receta)
     {
         //
+        $this->authorize('delete',$receta);
+        $receta->delete();
+        return redirect()->action([RecetaController::class, 'index']); ;
     }
 }
