@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\RecetaController;
 
 /*
@@ -35,5 +36,7 @@ Route::delete('/recetas/{receta}', [RecetaController::class,'destroy']) -> name(
 
 
 Auth::routes();
+//perfiles
+Route::get('/perfiles/{perfil}', [PerfilController::class,'show']) -> name('perfiles.show');
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

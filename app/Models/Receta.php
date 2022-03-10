@@ -23,6 +23,7 @@ class Receta extends Model
     {
         return $this->belongsTo(Categoria::class, 'categoria_id');
     }
+
     public function autorReceta()
     {
         return $this->belongsTo(User::class, 'user_id');
