@@ -38,5 +38,6 @@ Route::delete('/recetas/{receta}', [RecetaController::class,'destroy']) -> name(
 Auth::routes();
 //perfiles
 Route::get('/perfiles/{perfil}', [PerfilController::class,'show']) -> name('perfiles.show');
-
+Route::get('/perfiles/{perfil}/edit', [PerfilController::class,'edit']) -> name('perfiles.edit');
+Route::put('/perfiles/{perfil}', [PerfilController::class,'update']) -> name('perfiles.update');
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

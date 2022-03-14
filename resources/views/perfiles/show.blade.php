@@ -11,20 +11,12 @@
                 <h2 class="text-center mb-2 text-primary">
                     {{$perfil->perfilUser->name}}
                 </h2>
-
+                <a href="{{$perfil->perfiluser->url}}">Visitar Sitio Web</a>
+                <div class="biografia">
+                    {{$perfil->biografia}}
+                </div>
             </div>
         </div>
     </div>
 @endsection
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
 
-</body>
-</html>

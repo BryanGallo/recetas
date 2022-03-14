@@ -1,10 +1,10 @@
 @extends('layouts.app')
 @section('content')
     {{-- <p>{{ $receta }}</p> --}}
-    <article class="contenido-receta">
+    <article class="contenido-receta container">
         <h1 class="text-center mb-4">{{$receta->nombre}}</h1>
         <div class="imagen-receta">
-            <img class="w-100" src="/storage/{{$receta->imagen}}" alt="">
+            <img class="w-100 rounded" src="/storage/{{$receta->imagen}}" alt="">
         </div>
         <div class="receta-data">
             <p>
