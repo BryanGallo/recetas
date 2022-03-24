@@ -19,7 +19,7 @@
                 <div class="form-group">
                     <label for="nombre">Nombre del Perfil</label>
                     <input type="text" name="nombre" id="nombre" class="form-control @error('nombre') is-invalid @enderror"
-                        placeholder="nombre" value="{{ $perfil->nombre }}">
+                        placeholder="nombre" value="{{ $perfil->perfiluser->name }}">
                     @error('nombre')
                         <span class="invalid-feedback d-block" role="alert">
                             <strong>{{ $message }}</strong>
@@ -29,8 +29,8 @@
 
                 <div class="form-group">
                     <label for="url">Sitio Web</label>
-                    <input type="text" name="url" id="nombre" class="form-control @error('nombre') is-invalid @enderror"
-                        placeholder="Sitio Web" value="{{ $perfil->nombre }}">
+                    <input type="text" name="url" id="nombre" class="form-control @error('url') is-invalid @enderror"
+                        placeholder="Sitio Web" value="{{ $perfil->perfiluser->url }}">
                     @error('url')
                         <span class="invalid-feedback d-block" role="alert">
                             <strong>{{ $message }}</strong>
@@ -41,8 +41,8 @@
                 <div class="form-group">
                     <label for="biografia">Biografia</label>
                     <input name="biografia" id="biografia" class="form-control @error('biografia') is-invalid @enderror"
-                        value="{{ $perfil->preparacion }}" type="hidden" id="preparacion">
-                    <trix-editor input='preparacion' class="form-control @error('preparacion') is-invalid @enderror">
+                        value="{{ $perfil->biografia }}" type="hidden" id="biografia">
+                    <trix-editor input='biografia' class="form-control @error('biografia') is-invalid @enderror">
                     </trix-editor>
                     @error('biografia')
                         <span class="invalid-feedback d-block" role="alert">
@@ -71,9 +71,10 @@
 
 
                 <div class="form-group">
-                    <input type="submit" class="btn btn-primary " value="Actualizar Receta">
+                    <input type="submit" class="btn btn-primary " value="Actualizar Perfil">
                 </div>
             </form>
+            {{-- {{$perfil->perfiluser}} --}}
         </div>
     </div>
 @endsection

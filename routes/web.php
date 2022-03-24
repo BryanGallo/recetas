@@ -17,10 +17,10 @@ use App\Http\Controllers\RecetaController;
 |
 */
 
-/*Route::get('/', function () {
-    return view('welcome');
-    // return "Hola";
-});*/
+// Route::get('/', function () {
+//     return view('welcome');
+//     // return "Hola";
+// });
 // Route::get('/nosotros', function () {
 //     return view('nosotros');
 // });

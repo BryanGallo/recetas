@@ -13,7 +13,7 @@
                 </h2>
                 <a href="{{$perfil->perfiluser->url}}">Visitar Sitio Web</a>
                 <div class="biografia">
-                    {{$perfil->biografia}}
+                    {!!$perfil->biografia!!}
                 </div>
             </div>
         </div>
